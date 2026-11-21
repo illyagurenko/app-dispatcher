@@ -13,16 +13,16 @@ import java.util.UUID
 
 
 @Entity
-@Table(name = "APP_DISPATCHER_TRANS", schema = "ACC_APP_TRANS")
+@Table(name = "APP_DISPATCHER_TRANS", schema = "ACC_APP_DISPATCHER")
 class AppDispatcherTrans {
     @Id
     @Column(name = "ID", length = 256, nullable = false)
     var id: UUID? = null
 
-    @Column(name = "PROTOCOL_TYPE", length = 255)
+    @Column(name = "PROTOCOL_TYPE", length = 256)
     var protocolType: String? = null
 
-    @Column(name = "SYSTEM_ID", length = 255)
+    @Column(name = "SYSTEM_ID", length = 256)
     var systemId: String? = null
 
     @Column(name = "RESP_DATA", columnDefinition = "TEXT")
@@ -31,13 +31,13 @@ class AppDispatcherTrans {
     @Column(name = "REQ_DATA", columnDefinition = "TEXT")
     var reqData: String? = null
 
-    @Column(name = "STATUS", length = 255)
+    @Column(name = "STATUS", length = 256)
     var status: String? = null
 
     @Column(name = "RESP_CODE", length = 16)
     var respCode: String? = null
 
-    @Column(name = "RESP_DESC", length = 255)
+    @Column(name = "RESP_DESC", length = 256)
     var respDesc: String? = null
 
     @CreationTimestamp

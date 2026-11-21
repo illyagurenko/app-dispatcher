@@ -16,3 +16,6 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true

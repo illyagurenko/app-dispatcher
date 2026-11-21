@@ -1,3 +1,6 @@
 package ru.itone.illya4gurenko.dto
 
-data class ErrorDto(val code: String, val message: String)
+data class ErrorDto(
+    val code: String? = null,
+    val message: String? = null
+)

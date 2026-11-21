@@ -19,16 +19,16 @@ class AppDispatcherDatasource {
     @Column(name = "ID", nullable = false, updatable = false)
     var id: UUID? = null
 
-    @Column(name = "ACCOUNT", length = 255)
+    @Column(name = "ACCOUNT", length = 256)
     var account: String? = null
 
-    @Column(name = "JDBC", length = 255)
-    var jdbc: String? = null
+    @Column(name = "JDBC_URL", length = 256)
+    var jdbcUrl: String? = null
 
-    @Column(name = "JDBC_TYPE", length = 255)
+    @Column(name = "JDBC_TYPE", length = 256)
     var jdbcType: String? = null
 
-    @Column(name = "STATUS", length = 255)
+    @Column(name = "STATUS", length = 256)
     var status: String? = null
 
     @CreationTimestamp

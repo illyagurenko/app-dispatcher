@@ -15,10 +15,10 @@ class AppDispatcherPermission {
     @Column(name = "ID", nullable = false, updatable = false)
     var id: UUID? = null
 
-    @Column(name = "LOGIN", length = 255)
+    @Column(name = "LOGIN", length = 256)
     var login: String? = null
 
-    @Column(name = "PASS_BCRYPT", length = 255)
+    @Column(name = "PASS_BCRYPT", length = 256)
     var passBcrypt: String? = null
 
     @Column(name = "PERMISSION")
