@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/001-create-schema-and-tables.sql
   - include:
       file: db/changelog/002-insert-default-data.sql
+  - include:
+      file: db/changelog/003-create-index.sql
