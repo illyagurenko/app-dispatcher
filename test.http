@@ -1,0 +1,86 @@
+### 1. Успешный запрос получения источников данных по счетам
+# Генерирует динамический UUID через {{$uuid}} для каждого вызова
+POST http://localhost:8085/get-datasoure-by-account
+Content-Type: application/json
+Authorization: Basic QVBQX0NIQU5HRVI6MTIzNDU2Nzg=
+
+{
+  "data": {
+    "systemId": "APP_CHANGER",
+    "requestId": "{{$uuid}}",
+    "account": [
+      "ACC_GPB_001",
+      "ACC_GPB_002",
+      "ACC_UNMAPPED_999"
+    ]
+  },
+  "status": "Success",
+  "error": null
+}
+
+### 2. Успешный запрос с явным логином и паролем
+POST http://localhost:8085/get-datasoure-by-account
+Content-Type: application/json
+Authorization: Basic APP_CHANGER 12345678
+
+{
+  "data": {
+    "systemId": "APP_CHANGER",
+    "requestId": "{{$uuid}}",
+    "account": [
+      "ACC_GPB_001",
+      "ACC_GPB_002"
+    ]
+  },
+  "status": "Success",
+  "error": null
+}
+
+### 3. Проверка отказа в доступе (Неверный пароль -> 403 Forbidden)
+POST http://localhost:8085/get-datasoure-by-account
+Content-Type: application/json
+Authorization: Basic APP_CHANGER wrong_password
+
+{
+  "data": {
+    "systemId": "APP_CHANGER",
+    "requestId": "{{$uuid}}",
+    "account": [
+      "ACC_GPB_001"
+    ]
+  },
+  "status": "Success",
+  "error": null
+}
+
+### 4. Проверка валидации (Некорректный UUID -> 400 Bad Request)
+POST http://localhost:8085/get-datasoure-by-account
+Content-Type: application/json
+Authorization: Basic QVBQX0NIQU5HRVI6MTIzNDU2Nzg=
+
+{
+  "data": {
+    "systemId": "APP_CHANGER",
+    "requestId": "not-a-valid-uuid",
+    "account": [
+      "ACC_GPB_001"
+    ]
+  },
+  "status": "Success",
+  "error": null
+}
+
+### 5. Проверка валидации (Пустой список счетов account -> 400 Bad Request)
+POST http://localhost:8085/get-datasoure-by-account
+Content-Type: application/json
+Authorization: Basic QVBQX0NIQU5HRVI6MTIzNDU2Nzg=
+
+{
+  "data": {
+    "systemId": "APP_CHANGER",
+    "requestId": "{{$uuid}}",
+    "account": []
+  },
+  "status": "Success",
+  "error": null
+}

@@ -4,6 +4,9 @@ import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotEmpty
 import org.hibernate.validator.constraints.UUID
 
+/**
+ * блок данных входящего запроса
+ */
 data class RequestDataDto(
     @NotBlank(message = "Поле systemId обязательно")
     val systemId: String? = null,

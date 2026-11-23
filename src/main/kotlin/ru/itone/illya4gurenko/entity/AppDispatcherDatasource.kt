@@ -11,6 +11,9 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.time.ZonedDateTime
 import java.util.UUID
 
+/**
+ * сущность сопоставления банковских счетов с целевыми jdbc-источниками
+ */
 @Entity
 @Table(name = "APP_DISPATCHER_DATASOURCE", schema = "ACC_APP_DISPATCHER")
 class AppDispatcherDatasource {

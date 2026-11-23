@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository
 import ru.itone.illya4gurenko.entity.AppDispatcherTrans
 import java.util.UUID
 
+/**
+ * репозиторий для сохранения аудита транзакций
+ */
 @Repository
-interface TransRepository : JpaRepository<AppDispatcherTrans, UUID> {
-
-}
+interface TransRepository : JpaRepository<AppDispatcherTrans, UUID>

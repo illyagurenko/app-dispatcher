@@ -6,6 +6,9 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.time.ZonedDateTime
 import java.util.UUID
 
+/**
+ * сущность учетных записей и прав доступа систем-клиентов
+ */
 @Entity
 @Table(name = "APP_DISPATCHER_PERMISSION", schema = "ACC_APP_DISPATCHER")
 class AppDispatcherPermission {
