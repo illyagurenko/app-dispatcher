@@ -114,9 +114,8 @@
 ### Получение источников данных по списку счетов
 
 * **Эндпоинт:** `POST /get-datasource-by-account` (также поддерживается алиас `POST /get-datasoure-by-account`)
-* **Авторизация:** заголовок `Authorization` или `Basic` в одном из форматов:
+* **Авторизация:** заголовок `Authorization` или `Basic` в формате Base64:
   * `Basic <base64(login:password)>` (например `Basic QVBQX0NIQU5HRVI6MTIzNDU2Nzg=`)
-  * `Basic <login> <password>` (например `Basic APP_CHANGER 12345678`)
   * Значение `login` должно совпадать с полем `data.systemId`.
 
 **Пример запроса:**

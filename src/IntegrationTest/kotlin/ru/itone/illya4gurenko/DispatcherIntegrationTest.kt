@@ -136,6 +136,7 @@ class DispatcherIntegrationTest {
     @DisplayName("успешный запрос через алиас /get-datasoure-by-account и заголовок Basic")
     fun testTypoEndpointWithCustomBasicHeader() {
         val requestId = UUID.randomUUID().toString()
+        val authHeader = "Basic " + Base64.getEncoder().encodeToString("APP_CHANGER:12345678".toByteArray())
 
         val payload = """
             {
@@ -151,7 +152,7 @@ class DispatcherIntegrationTest {
         mockMvc.perform(
             post("/get-datasoure-by-account")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Basic", "Basic APP_CHANGER 12345678")
+                .header("Basic", authHeader)
                 .content(payload)
         )
             .andExpect(status().isOk)
@@ -167,6 +168,7 @@ class DispatcherIntegrationTest {
     @DisplayName("отказ в доступе 403 при неверном пароле и фиксация ошибки в бд")
     fun testInvalidPasswordForbidden() {
         val requestId = UUID.randomUUID().toString()
+        val wrongAuthHeader = "Basic " + Base64.getEncoder().encodeToString("APP_CHANGER:wrong_password".toByteArray())
 
         val payload = """
             {
@@ -182,11 +184,11 @@ class DispatcherIntegrationTest {
         mockMvc.perform(
             post("/get-datasoure-by-account")
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Basic APP_CHANGER wrong_password")
+                .header("Authorization", wrongAuthHeader)
                 .content(payload)
         )
             .andExpect(status().isForbidden)
-            .andExpect(jsonPath("$.status").value("Error"))
+            .andExpect(jsonPath("$.status").value("error"))
             .andExpect(jsonPath("$.error.code").value("ACCESS_DENIED"))
 
         val savedTrans = transRepository.findById(UUID.fromString(requestId)).orElse(null)
@@ -217,7 +219,7 @@ class DispatcherIntegrationTest {
                 .content(payload)
         )
             .andExpect(status().isUnauthorized)
-            .andExpect(jsonPath("$.status").value("Error"))
+            .andExpect(jsonPath("$.status").value("error"))
             .andExpect(jsonPath("$.error.code").value("ACCESS_DENIED"))
 
         val savedTrans = transRepository.findById(UUID.fromString(requestId)).orElse(null)
@@ -248,7 +250,7 @@ class DispatcherIntegrationTest {
                 .content(payload)
         )
             .andExpect(status().isBadRequest)
-            .andExpect(jsonPath("$.status").value("Error"))
+            .andExpect(jsonPath("$.status").value("error"))
             .andExpect(jsonPath("$.error.code").value("VALIDATION_ERROR"))
     }
 }
