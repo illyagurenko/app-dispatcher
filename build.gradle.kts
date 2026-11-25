@@ -54,6 +54,34 @@ allOpen {
 	annotation("jakarta.persistence.Embeddable")
 }
 
+sourceSets {
+	create("integrationTest") {
+		kotlin.srcDir("src/IntegrationTest/kotlin")
+		resources.srcDir("src/IntegrationTest/resources")
+		compileClasspath += sourceSets["main"].output + sourceSets["test"].output
+		runtimeClasspath += sourceSets["main"].output + sourceSets["test"].output
+	}
+}
+
+val integrationTestImplementation by configurations.getting {
+	extendsFrom(configurations["testImplementation"])
+}
+val integrationTestRuntimeOnly by configurations.getting {
+	extendsFrom(configurations["testRuntimeOnly"])
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.register<Test>("integrationTest") {
+	description = "Runs integration tests."
+	group = "verification"
+	testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+	classpath = sourceSets["integrationTest"].runtimeClasspath
+	useJUnitPlatform()
+}
+
+tasks.withType<ProcessResources> {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
